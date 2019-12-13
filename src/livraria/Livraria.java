@@ -1,15 +1,17 @@
 package livraria;
 
 import DB.Connect;
-import DB.CreateDB;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import view.Menu;
 
 public class Livraria {
 
     public static void main(String[] args) {
-        Connection testeConexao = new Connect("root","","TestesJDBC3").connection;
+        // Criar conexão e banco
+        new Connect("root","","NovaLivraria");
+        
+        // Abrir tela de Menu
+        Menu viewMenu = new Menu();
+        viewMenu.setVisible(true);
     }
     
 }
