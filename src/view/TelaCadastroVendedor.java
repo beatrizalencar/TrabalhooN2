@@ -156,11 +156,11 @@ public class TelaCadastroVendedor extends javax.swing.JInternalFrame {
         btnNovo = new javax.swing.JButton();
         btnExcluir = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(204, 204, 255));
         setClosable(true);
         setTitle("Cadasro de Vendores");
 
         tabelaDeVendedores.setModel(tabelaModelo);
-        tabelaDeVendedores.setColumnSelectionAllowed(false);
         tabelaDeVendedores.getTableHeader().setReorderingAllowed(false);
         tabelaDeVendedores.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
             @Override
@@ -360,11 +360,13 @@ public class TelaCadastroVendedor extends javax.swing.JInternalFrame {
                 vController.listarPorId(tabelaModelo, id);
                 break;
             case "Pelo CPF":
-                JOptionPane.showMessageDialog(this, "Funcionalidade não disponível");
+                String CPF = JOptionPane.showInputDialog(this, "CPF DO VENDEDOR");
+                vController.listarPorCPF(tabelaModelo, CPF);
                 break;
             default:
                 vController.listarTodos(tabelaModelo);
         }
+       
     }//GEN-LAST:event_btnProcurarActionPerformed
 
     private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed

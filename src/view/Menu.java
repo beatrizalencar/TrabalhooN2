@@ -62,6 +62,11 @@ public class Menu extends javax.swing.JFrame {
 
         cadastroLivro.setMnemonic('o');
         cadastroLivro.setText("Livro");
+        cadastroLivro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cadastroLivroActionPerformed(evt);
+            }
+        });
         fileMenu.add(cadastroLivro);
 
         cadastroVendedor.setMnemonic('s');
@@ -135,6 +140,19 @@ public class Menu extends javax.swing.JFrame {
         painelDesktop.add(telaVendedor);
         telaVendedor.setVisible(true);
     }//GEN-LAST:event_cadastroVendedorActionPerformed
+
+    private void cadastroLivroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastroLivroActionPerformed
+        TelaCadastroLivro telaLivro = new TelaCadastroLivro();
+
+        Dimension desktopSize = painelDesktop.getSize();
+        Dimension jInternalFrameSize = telaLivro.getSize();
+        int width = (desktopSize.width - jInternalFrameSize.width) / 2;
+        int height = (desktopSize.height - jInternalFrameSize.height) / 2;
+        telaLivro.setLocation(width, height);
+
+        painelDesktop.add(telaLivro);
+        telaLivro.setVisible(true);
+    }//GEN-LAST:event_cadastroLivroActionPerformed
 
     /**
      * @param args the command line arguments

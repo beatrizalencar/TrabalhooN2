@@ -33,6 +33,13 @@ public class VendedorController {
         modeloTabela.addRow(new Object[]{vendedorBuscado.getId(), vendedorBuscado.getCPF(),
             vendedorBuscado.getNome(), vendedorBuscado.getEndereco(), vendedorBuscado.isStatus() ? "1 - Ativo" : "2 - Inativo"});
     }
+      public void listarPorCPF(DefaultTableModel modeloTabela, String CPF) {
+        modeloTabela.setNumRows(0);
+        Vendedor vendedorBuscado = vDAO.buscarPorCPF(CPF);
+
+        modeloTabela.addRow(new Object[]{vendedorBuscado.getId(), vendedorBuscado.getCPF(),
+            vendedorBuscado.getNome(), vendedorBuscado.getEndereco(), vendedorBuscado.isStatus() ? "1 - Ativo" : "2 - Inativo"});
+    }
     
     public void salvar(DefaultTableModel modeloTabela, Vendedor vendedor, boolean novo ) {
         if( novo ) {

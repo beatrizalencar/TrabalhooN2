@@ -18,6 +18,7 @@ public class VendedorDAO implements iDAO<Vendedor> {
     private final String DELETE = "DELETE FROM vendedor WHERE ID =?";
     private final String LISTALL = "SELECT * FROM vendedor";
     private final String LISTBYID = "SELECT * FROM vendedor WHERE ID=?";
+    private final String LISTBYCPF = "SELECT * FROM vendedor WHERE CPF=?";
 
     private Connect conn = null;
     private Connection conexao = null;
@@ -214,5 +215,44 @@ public class VendedorDAO implements iDAO<Vendedor> {
         this.conn = new Connect("root","","NovaLivraria");
         return this.conn;
     }
+
+    public Vendedor buscarPorCPF(String CPF) {
+         conexao = this.getConnect().connection;
+        
+        ResultSet resultado = null;
+        Vendedor vendedorEncontrado = new Vendedor();
+
+        if (conexao != null) {
+            try {
+                PreparedStatement transacaoSQL;
+                transacaoSQL = conexao.prepareStatement(LISTBYCPF);
+                transacaoSQL.setString(1, CPF);
+
+                resultado = transacaoSQL.executeQuery();
+
+                while (resultado.next()) {
+
+                    vendedorEncontrado.setId(resultado.getInt("id"));
+                    vendedorEncontrado.setCPF(resultado.getString("CPF"));
+                    vendedorEncontrado.setNome(resultado.getString("nome"));
+                    vendedorEncontrado.setEndereco(resultado.getString("endereco"));
+                    vendedorEncontrado.setStatus(resultado.getBoolean("status"));
+                   
+                }
+                
+                conn.fechaConexao(conexao, transacaoSQL);
+
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Erro na transação SQL", "Erro ao procurar vendedor no banco de" + "dados. \n" + e.getMessage(), JOptionPane.ERROR_MESSAGE);
+                System.out.println(e.getMessage());
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Problemas de conexão", "Não foi possível se conectar ao banco.", JOptionPane.ERROR_MESSAGE);
+        }
+
+        return vendedorEncontrado;
+    }
+    
+
 
 }
