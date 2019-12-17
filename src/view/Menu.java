@@ -46,6 +46,8 @@ public class Menu extends javax.swing.JFrame {
         setTitle("Sistema de Livraria");
         setName("FramePrincipal"); // NOI18N
 
+        painelDesktop.setBackground(new java.awt.Color(204, 204, 255));
+
         javax.swing.GroupLayout painelDesktopLayout = new javax.swing.GroupLayout(painelDesktop);
         painelDesktop.setLayout(painelDesktopLayout);
         painelDesktopLayout.setHorizontalGroup(
@@ -89,6 +91,11 @@ public class Menu extends javax.swing.JFrame {
 
         cutMenuItem.setMnemonic('t');
         cutMenuItem.setText("Livro");
+        cutMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cutMenuItemActionPerformed(evt);
+            }
+        });
         editMenu.add(cutMenuItem);
 
         copyMenuItem.setMnemonic('y');
@@ -154,9 +161,20 @@ public class Menu extends javax.swing.JFrame {
         telaLivro.setVisible(true);
     }//GEN-LAST:event_cadastroLivroActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
+    private void cutMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cutMenuItemActionPerformed
+        TelaVenda telaVenda = new TelaVenda();
+
+        Dimension desktopSize = painelDesktop.getSize();
+        Dimension jInternalFrameSize = telaVenda.getSize();
+        int width = (desktopSize.width - jInternalFrameSize.width) / 2;
+        int height = (desktopSize.height - jInternalFrameSize.height) / 2;
+        telaVenda.setLocation(width, height);
+
+        painelDesktop.add(telaVenda);
+        telaVenda.setVisible(true);
+    }//GEN-LAST:event_cutMenuItemActionPerformed
+
+    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
